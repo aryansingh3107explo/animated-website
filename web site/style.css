@@ -1,0 +1,243 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Define Global Variables */
+:root {
+  --background-color: #fcf9f8;
+  --text-color: #1c1b1b;
+  --surface-color: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --lime-glow: rgba(217, 224, 33, 0.4);
+}
+
+/* Dark Mode Overrides */
+html.dark {
+  --background-color: #121212;
+  --text-color: #f3f0ef;
+  --surface-color: #1e1d1d;
+  --glass-bg: rgba(30, 29, 29, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --lime-glow: rgba(228, 235, 47, 0.2);
+}
+
+html, body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Header & Nav adjust */
+html.dark header {
+  background-color: rgba(18, 18, 18, 0.8) !important;
+}
+
+/* Fixed Background Canvas */
+#scroll-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+  transition: opacity 0.3s ease-out;
+}
+
+/* Scroll Animation Range Container */
+.scroll-anim-container {
+  position: relative;
+  height: 200vh;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* Overlay content on top of fixed canvas */
+.scroll-anim-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  background: radial-gradient(circle at center, rgba(15, 15, 15, 0.35) 0%, rgba(0, 0, 0, 0.8) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 10;
+  pointer-events: auto;
+  transition: opacity 0.2s ease-out;
+}
+
+html.dark .scroll-anim-overlay {
+  background: radial-gradient(circle at center, rgba(5, 5, 5, 0.5) 0%, rgba(0, 0, 0, 0.9) 100%);
+}
+
+/* HUD Overlay - stays fixed while scrolling the animation range */
+.hud-container {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 20;
+  background: rgba(28, 27, 27, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 8px 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+  transition: opacity 0.3s ease-out;
+}
+
+.hud-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.hud-value {
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: #d9e021;
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(217, 224, 33, 0.4);
+}
+
+/* Subsequent Sections Wrapper to overlay on top of fixed canvas */
+.content-wrapper {
+  position: relative;
+  z-index: 30;
+  background-color: var(--background-color);
+  width: 100%;
+}
+
+/* Drag to Rotate Product View */
+.drag-showcase-container {
+  cursor: grab;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+}
+
+.drag-showcase-container:active {
+  cursor: grabbing;
+}
+
+/* Cart side drawer slider */
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: -450px;
+  width: 100%;
+  max-width: 450px;
+  height: 100vh;
+  background-color: var(--surface-color);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--glass-border);
+}
+
+.cart-drawer.open {
+  right: 0;
+}
+
+/* Dark mode glass card */
+.glass-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+}
+
+/* Modals Backdrops */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -45%) scale(0.95);
+  width: 90%;
+  max-width: 700px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background-color: var(--surface-color);
+  border-radius: 32px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+.modal-container.open {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d9e021;
+}
+
+/* SVG Chart lines styling */
+.chart-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawChart 2.5s ease forwards;
+}
+
+@keyframes drawChart {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
