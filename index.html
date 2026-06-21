@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>HYPHEN | Golden Hour Glow Serum</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;family=Playfair+Display:wght@700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Playfair+Display:wght@100..900&amp;display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --lime-glow: rgba(217, 224, 33, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(32px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .glass-card:hover {
+            border-color: #D9E021;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 0 20px var(--lime-glow);
+            transform: translateY(-8px);
+        }
+
+        .hero-title {
+            text-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .water-drop {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            filter: blur(1px);
+        }
+
+        /* Material Symbols styling */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .faq-accordion[open] summary .expand-icon {
+            transform: rotate(45deg);
+        }
+
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1c1b1b",
+                        "on-primary-container": "#5e6100",
+                        "surface-dim": "#dcd9d9",
+                        "surface": "#fcf9f8",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-primary-fixed-variant": "#474a00",
+                        "secondary": "#6b5a5d",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary-container": "#d9e021",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#f5dde1",
+                        "inverse-surface": "#313030",
+                        "surface-bright": "#fcf9f8",
+                        "on-surface-variant": "#484833",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-surface": "#1c1b1b",
+                        "surface-container-highest": "#e5e2e1",
+                        "secondary-fixed-dim": "#d8c1c5",
+                        "surface-tint": "#5f6200",
+                        "tertiary-container": "#d7d7d7",
+                        "surface-container": "#f0eded",
+                        "outline-variant": "#c9c8ad",
+                        "primary-fixed-dim": "#c8cf00",
+                        "primary": "#5f6200",
+                        "surface-container-low": "#f6f3f2",
+                        "on-primary-fixed": "#1c1d00",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#c8cf00",
+                        "on-tertiary-container": "#5c5d5e",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e5e2e1",
+                        "tertiary": "#5d5f5f",
+                        "error": "#ba1a1a",
+                        "background": "#fcf9f8",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-secondary-container": "#726063",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#797861",
+                        "on-secondary-fixed": "#25181b",
+                        "on-secondary-fixed-variant": "#534346",
+                        "secondary-container": "#f5dde1",
+                        "surface-container-high": "#eae7e7",
+                        "primary-fixed": "#e4eb2f",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Playfair Display"],
+                        "headline-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["20px", {"lineHeight": "1.5", "letterSpacing": "0.02em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background overflow-x-hidden">
+    <!-- TopNavBar -->
+    <header class="fixed top-0 w-full bg-white/70 backdrop-blur-3xl border-b border-white/20 shadow-sm z-50">
+        <nav class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-4 flex justify-between items-center">
+            <div class="text-headline-md font-headline-md tracking-widest text-on-background">HYPHEN</div>
+            <div class="hidden md:flex gap-10 items-center">
+                <a class="text-label-caps font-label-caps text-primary font-bold border-b-2 border-primary pb-1" href="#scroll-section">Scroll Showcase</a>
+                <a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-all duration-300" href="#ingredients">Ingredients</a>
+                <a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-all duration-300" href="#reviews">Reviews</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <!-- Theme Toggle Button -->
+                <button onclick="toggleTheme()" class="w-10 h-10 rounded-full border border-on-background/10 flex items-center justify-center text-on-background hover:bg-secondary-container/20 transition-all duration-300 active:scale-95">
+                    <span class="material-symbols-outlined theme-toggle-icon">dark_mode</span>
+                </button>
+                <!-- Cart Button -->
+                <button onclick="toggleCart()" class="relative w-10 h-10 rounded-full border border-on-background/10 flex items-center justify-center text-on-background hover:bg-secondary-container/20 transition-all duration-300 active:scale-95">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-[#ba1a1a] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold hidden">0</span>
+                </button>
+                <!-- Skin Quiz Button -->
+                <button onclick="openQuiz()" class="bg-primary-container text-on-primary-container text-label-caps font-label-caps px-6 py-2.5 rounded-full hover:shadow-[0_0_20px_var(--lime-glow)] transition-all duration-300 active:scale-95 hidden sm:block">AI Skin Quiz</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Fullscreen Canvas for Frame Animation (Fixed in Background) -->
+    <canvas id="scroll-canvas"></canvas>
+
+    <!-- Scroll Animation Section -->
+    <section id="scroll-section" class="scroll-anim-container">
+        <!-- Hero Overlay content for visual punch -->
+        <div class="scroll-anim-overlay absolute inset-0 flex flex-col justify-center items-center text-center p-6 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10">
+            <span class="text-label-caps font-label-caps text-primary-container tracking-widest block mb-4 uppercase text-sm drop-shadow-md">Scroll to Explore</span>
+            <h1 class="text-display-lg-mobile md:text-display-lg font-display-lg text-white mb-6 drop-shadow-lg">
+                Witness The Evolution Of <br><span class="text-primary-container">Perfect Glow</span>
+            </h1>
+            <p class="text-body-lg font-body-lg text-white/90 mb-8 max-w-xl mx-auto drop-shadow">
+                See our formulation rotate and transform in real-time as you scroll.
+            </p>
+            <div class="w-8 h-12 border-2 border-white/30 rounded-full flex justify-center items-start p-1.5 opacity-80 animate-bounce">
+                <div class="w-1.5 h-3 bg-primary-container rounded-full"></div>
+            </div>
+        </div>
+
+        <!-- Clean, subtle UI HUD in the corner -->
+        <div class="hud-container">
+            <div class="hud-label">FRAME</div>
+            <div class="hud-value" id="hud-value">01 / 40</div>
+        </div>
+    </section>
+
+    <!-- Content Wrapper to scroll over fixed background canvas -->
+    <div class="content-wrapper">
+
+    <!-- Static Hero Section -->
+    <section class="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden">
+        <!-- Floating Particles Container -->
+        <div class="absolute inset-0 pointer-events-none" id="particle-container"></div>
+        <div class="relative z-10 container max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center gap-gutter">
+            <div class="w-full md:w-1/2 text-center md:text-left reveal-text">
+                <h1 class="text-display-lg-mobile md:text-display-lg font-display-lg mb-6 hero-title">
+                    Glow Like Golden Hour, <br> <span class="text-primary-container">Every Hour</span>
+                </h1>
+                <p class="text-body-lg font-body-lg text-on-surface-variant mb-10 max-w-lg mx-auto md:mx-0">
+                    56% Glow Hyphened™ Serum powered by Kakadu Plum, Niacinamide and Ceramides.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <button onclick="addToCart('serum-01')" class="bg-primary-container text-on-primary-container text-label-caps font-label-caps px-10 py-4 rounded-full hover:shadow-lg transition-all active:scale-95">Buy Now</button>
+                    <button onclick="addToCart('serum-01')" class="border border-primary-container/40 backdrop-blur-md text-label-caps font-label-caps px-10 py-4 rounded-full hover:bg-primary-container/5 hover:shadow-[0_0_15px_var(--lime-glow)] transition-all duration-300 active:scale-95">Add to Cart</button>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2 flex justify-center relative mt-12 md:mt-0">
+                <div class="floating-element relative z-20">
+                    <img class="w-[300px] md:w-[450px] drop-shadow-2xl" data-alt="A high-end product photography shot of the HYPHEN Golden Hour Glow Serum..." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBibvmL2LBI31VWchreLuNL1I_mhaREXeXojgPpL3_qTmPYTcAyZusGD13DWbYOsUI9OpdSFjRipBcg27oWY-qeRiv5LWqBMqG6nI7l0aeTSwpi2-mHVOjkM1T7jX4N9i4Hszl_hO9hLltuOyH-tUR2pzmw1aWfwmNYRjG8ipSJUdGzr9lNTEIzSZMiSg0yqhEXe0pwTLnqhLTwrJL3-qDYqf8bnHLiwCFtbikaOefqTQKJvReB4BINRokaw_L-FexYYHwhezpnXnA">
+                </div>
+                <!-- Ambient Glow behind bottle -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary-container/20 blur-[120px] rounded-full -z-10"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-12 bg-white/40 backdrop-blur-xl border-y border-white/20">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                <div class="stat-item">
+                    <div class="text-display-lg-mobile md:text-display-lg font-display-lg text-primary-container counter" data-target="56">56</div>
+                    <p class="text-label-caps font-label-caps text-on-surface-variant mt-2">Glow Formula</p>
+                </div>
+                <div class="stat-item border-x-0 md:border-x border-on-background/10">
+                    <div class="text-display-lg-mobile md:text-display-lg font-display-lg text-primary-container counter" data-target="10000">10000</div>
+                    <p class="text-label-caps font-label-caps text-on-surface-variant mt-2">Happy Customers</p>
+                </div>
+                <div class="stat-item">
+                    <div class="text-display-lg-mobile md:text-display-lg font-display-lg text-primary-container">4.8★</div>
+                    <p class="text-label-caps font-label-caps text-on-surface-variant mt-2">Trust Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Showcase (3D Product Drag-to-Rotate View) -->
+    <section class="py-section-gap relative overflow-hidden">
+        <div class="container max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-16">
+            <h2 class="text-headline-md font-headline-md mb-4">Precision in Every Molecule</h2>
+            <p class="text-body-md font-body-md text-on-surface-variant">Click/Touch and drag the bottle below to spin it in 3D space.</p>
+        </div>
+        <div class="h-[550px] w-full flex justify-center items-center">
+            <div class="relative w-[90%] max-w-[700px] h-[500px] drag-showcase-container bg-gradient-to-b from-primary-container/5 to-secondary-container/5 border border-on-background/5 shadow-2xl">
+                <!-- Canvas for interactive drag animation -->
+                <canvas id="showcase-canvas" class="w-full h-full object-cover"></canvas>
+                
+                <!-- Helper overlay -->
+                <div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/20 dark:bg-black/30 backdrop-blur-md px-6 py-2 rounded-full border border-white/30 text-label-caps text-[10px] font-label-caps tracking-widest text-on-background pointer-events-none flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm animate-pulse">drag_pan</span>
+                    DRAG TO SPIN 3D BOTTLE
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ingredients Bento Grid -->
+    <section id="ingredients" class="py-section-gap bg-secondary-container/10">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div class="max-w-2xl">
+                    <span class="text-label-caps font-label-caps text-primary tracking-widest block mb-4 uppercase">The Science</span>
+                    <h2 class="text-display-lg-mobile md:text-display-lg font-display-lg">The Power Quintet</h2>
+                </div>
+                <p class="text-body-md font-body-md text-on-surface-variant max-w-sm mt-6 md:mt-0">Clinical strength botanical actives formulated for maximal bioavailability and luminous results.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+                <!-- Large Card 1 -->
+                <div class="md:col-span-3 glass-card p-10 rounded-[40px] flex flex-col justify-between h-[450px] ingredient-reveal">
+                    <div>
+                        <div class="w-16 h-16 bg-primary-container/20 rounded-2xl flex items-center justify-center mb-8">
+                            <span class="material-symbols-outlined text-primary text-3xl">spa</span>
+                        </div>
+                        <h3 class="text-headline-md font-headline-md mb-4">Kakadu Plum</h3>
+                        <p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">The world's richest source of Vitamin C, providing 100x more than an orange for unparalleled brightening and antioxidant protection.</p>
+                    </div>
+                    <div class="text-label-caps font-label-caps text-primary border-b border-primary w-fit mt-8 cursor-pointer hover:opacity-70 transition-opacity">Discover More</div>
+                </div>
+                <!-- Large Card 2 -->
+                <div class="md:col-span-3 glass-card p-10 rounded-[40px] flex flex-col justify-between h-[450px] ingredient-reveal">
+                    <div>
+                        <div class="w-16 h-16 bg-primary-container/20 rounded-2xl flex items-center justify-center mb-8">
+                            <span class="material-symbols-outlined text-primary text-3xl">science</span>
+                        </div>
+                        <h3 class="text-headline-md font-headline-md mb-4">Niacinamide (5%)</h3>
+                        <p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">Refines pore appearance, strengthens the lipid barrier, and calms redness for a smooth, porcelain finish.</p>
+                    </div>
+                    <div class="text-label-caps font-label-caps text-primary border-b border-primary w-fit mt-8 cursor-pointer hover:opacity-70 transition-opacity">Scientific Data</div>
+                </div>
+                <!-- Small Card 1 -->
+                <div class="md:col-span-2 glass-card p-8 rounded-[32px] ingredient-reveal">
+                    <span class="material-symbols-outlined text-primary text-3xl mb-6 block">shield_heart</span>
+                    <h4 class="text-headline-sm font-headline-sm mb-2">Ceramides</h4>
+                    <p class="text-body-md font-body-md text-on-surface-variant opacity-80">Locks in moisture for all-day elasticity.</p>
+                </div>
+                <!-- Small Card 2 -->
+                <div class="md:col-span-2 glass-card p-8 rounded-[32px] ingredient-reveal">
+                    <span class="material-symbols-outlined text-primary text-3xl mb-6 block">flare</span>
+                    <h4 class="text-headline-sm font-headline-sm mb-2">Alpha Arbutin</h4>
+                    <p class="text-body-md font-body-md text-on-surface-variant opacity-80">Targets dark spots and hyperpigmentation.</p>
+                </div>
+                <!-- Small Card 3 -->
+                <div class="md:col-span-2 glass-card p-8 rounded-[32px] ingredient-reveal">
+                    <span class="material-symbols-outlined text-primary text-3xl mb-6 block">biotech</span>
+                    <h4 class="text-headline-sm font-headline-sm mb-2">Peptides</h4>
+                    <p class="text-body-md font-body-md text-on-surface-variant opacity-80">Stimulates collagen for firming results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="py-section-gap bg-white">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="text-center mb-16">
+                <span class="text-label-caps font-label-caps text-primary tracking-widest block mb-4 uppercase">Application</span>
+                <h2 class="text-display-lg-mobile md:text-display-lg font-display-lg">The Glow Ritual</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="group flex flex-col items-center text-center p-8 rounded-[32px] hover:bg-primary-container/5 transition-all duration-300">
+                    <div class="w-20 h-20 bg-primary-container/10 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+                        <span class="material-symbols-outlined text-primary text-4xl">dry_cleaning</span>
+                    </div>
+                    <div class="text-label-caps font-label-caps text-primary mb-2">STEP 01</div>
+                    <h3 class="text-headline-sm font-headline-sm mb-4">Cleanse</h3>
+                    <p class="text-body-md font-body-md text-on-surface-variant">Begin with a fresh canvas. Use a gentle cleanser to remove impurities and prep skin for absorption.</p>
+                </div>
+                <div class="group flex flex-col items-center text-center p-8 rounded-[32px] hover:bg-primary-container/5 transition-all duration-300">
+                    <div class="w-20 h-20 bg-primary-container/10 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+                        <span class="material-symbols-outlined text-primary text-4xl">water_drop</span>
+                    </div>
+                    <div class="text-label-caps font-label-caps text-primary mb-2">STEP 02</div>
+                    <h3 class="text-headline-sm font-headline-sm mb-4">Apply</h3>
+                    <p class="text-body-md font-body-md text-on-surface-variant">Dispense 2-3 drops of Golden Hour Glow. Gently pat onto face and neck until fully absorbed.</p>
+                </div>
+                <div class="group flex flex-col items-center text-center p-8 rounded-[32px] hover:bg-primary-container/5 transition-all duration-300">
+                    <div class="w-20 h-20 bg-primary-container/10 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+                        <span class="material-symbols-outlined text-primary text-4xl">shield</span>
+                    </div>
+                    <div class="text-label-caps font-label-caps text-primary mb-2">STEP 03</div>
+                    <h3 class="text-headline-sm font-headline-sm mb-4">Seal</h3>
+                    <p class="text-body-md font-body-md text-on-surface-variant">Lock in the hydration with your favorite moisturizer or sunscreen to maintain that lit-from-within glow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-section-gap overflow-hidden">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <h2 class="text-display-lg-mobile md:text-display-lg font-display-lg text-center mb-20 benefit-title">Wait, There's More...</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Benefit Items -->
+                <div class="benefit-card group">
+                    <div class="p-8 rounded-[40px] border border-on-background/5 hover:border-primary-container/40 transition-all duration-500 hover:bg-white shadow-sm h-full">
+                        <span class="material-symbols-outlined text-primary text-4xl mb-6 block group-hover:scale-110 transition-transform">flare</span>
+                        <h3 class="text-headline-sm font-headline-sm mb-4">Brightens Skin</h3>
+                        <p class="text-body-md font-body-md text-on-surface-variant">Evens out dullness to reveal a lit-from-within luminosity that lasts all day.</p>
+                    </div>
+                </div>
+                <div class="benefit-card group">
+                    <div class="p-8 rounded-[40px] border border-on-background/5 hover:border-primary-container/40 transition-all duration-500 hover:bg-white shadow-sm h-full">
+                        <span class="material-symbols-outlined text-primary text-4xl mb-6 block group-hover:scale-110 transition-transform">water_drop</span>
+                        <h3 class="text-headline-sm font-headline-sm mb-4">Hydrates Deeply</h3>
+                        <p class="text-body-md font-body-md text-on-surface-variant">7-layer hydration technology that penetrates the epidermis for plump, bouncy skin.</p>
+                    </div>
+                </div>
+                <div class="benefit-card group">
+                    <div class="p-8 rounded-[40px] border border-on-background/5 hover:border-primary-container/40 transition-all duration-500 hover:bg-white shadow-sm h-full">
+                        <span class="material-symbols-outlined text-primary text-4xl mb-6 block group-hover:scale-110 transition-transform">shield_moon</span>
+                        <h3 class="text-headline-sm font-headline-sm mb-4">Barrier Repair</h3>
+                        <p class="text-body-md font-body-md text-on-surface-variant">Ceramide complex reinforces the skin’s natural shield against environmental stressors.</p>
+                    </div>
+                </div>
+                <div class="benefit-card group">
+                    <div class="p-8 rounded-[40px] border border-on-background/5 hover:border-primary-container/40 transition-all duration-500 hover:bg-white shadow-sm h-full">
+                        <span class="material-symbols-outlined text-primary text-4xl mb-6 block group-hover:scale-110 transition-transform">gradient</span>
+                        <h3 class="text-headline-sm font-headline-sm mb-4">Reduces Spots</h3>
+                        <p class="text-body-md font-body-md text-on-surface-variant">Clinically proven to reduce hyperpigmentation by 32% in just 14 days.</p>
+                    </div>
+                </div>
+                <div class="benefit-card group">
+                    <div class="p-8 rounded-[40px] border border-on-background/5 hover:border-primary-container/40 transition-all duration-500 hover:bg-white shadow-sm h-full">
+                        <span class="material-symbols-outlined text-primary text-4xl mb-6 block group-hover:scale-110 transition-transform">auto_awesome</span>
+                        <h3 class="text-headline-sm font-headline-sm mb-4">Instant Glow</h3>
+                        <p class="text-body-md font-body-md text-on-surface-variant">Reflective particles give an immediate glass-skin effect before makeup application.</p>
+                    </div>
+                </div>
+                <div class="benefit-card group">
+                    <div class="p-8 rounded-[40px] border border-on-background/5 hover:border-primary-container/40 transition-all duration-500 hover:bg-white shadow-sm h-full">
+                        <span class="material-symbols-outlined text-primary text-4xl mb-6 block group-hover:scale-110 transition-transform">waves</span>
+                        <h3 class="text-headline-sm font-headline-sm mb-4">Evens Skin Tone</h3>
+                        <p class="text-body-md font-body-md text-on-surface-variant">Smoothes out texture and balances complexion for a unified, healthy look.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-section-gap bg-surface-container-low">
+        <div class="max-w-[800px] mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="text-center mb-16">
+                <h2 class="text-display-lg-mobile md:text-headline-md font-display-lg">Your Glow, Decoded</h2>
+            </div>
+            <div class="space-y-4">
+                <details class="faq-accordion glass-card rounded-2xl overflow-hidden group">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+                        <span class="text-headline-sm font-headline-sm">Is it suitable for sensitive skin?</span>
+                        <span class="material-symbols-outlined expand-icon text-primary">add</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-body-md font-body-md text-on-surface-variant">
+                        Yes, our formula is dermatologically tested and pH-balanced to be gentle on all skin types, including sensitive and acne-prone skin.
+                    </div>
+                </details>
+                <details class="faq-accordion glass-card rounded-2xl overflow-hidden group">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+                        <span class="text-headline-sm font-headline-sm">Can I use it with Retinol?</span>
+                        <span class="material-symbols-outlined expand-icon text-primary">add</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-body-md font-body-md text-on-surface-variant">
+                        Absolutely. The Niacinamide and Ceramides in our serum actually help soothe the skin, making it a great companion for potentially irritating actives like Retinol.
+                    </div>
+                </details>
+                <details class="faq-accordion glass-card rounded-2xl overflow-hidden group">
+                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+                        <span class="text-headline-sm font-headline-sm">When will I see results?</span>
+                        <span class="material-symbols-outlined expand-icon text-primary">add</span>
+                    </summary>
+                    <div class="px-6 pb-6 text-body-md font-body-md text-on-surface-variant">
+                        You'll notice an immediate "glass-skin" glow upon application. For long-term benefits like reduced hyperpigmentation and improved texture, clinical results show significant changes in 14 to 28 days of consistent use.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-section-gap bg-surface">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <h2 class="text-headline-md font-headline-md text-center mb-16">The Verdict</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-3xl review-card">
+                    <div class="flex gap-1 text-primary-container mb-4">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="text-body-md italic mb-6">"Literally magic in a bottle. My skin has never looked this vibrant and the texture is so much smoother after just a week."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-secondary-container"></div>
+                        <div>
+                            <p class="text-label-caps font-bold">Sophia M.</p>
+                            <p class="text-[10px] opacity-60 uppercase tracking-widest">Verified Buyer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card p-8 rounded-3xl review-card">
+                    <div class="flex gap-1 text-primary-container mb-4">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="text-body-md italic mb-6">"The best part is how it feels—non-sticky but super hydrating. It works perfectly under my foundation."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-secondary-container"></div>
+                        <div>
+                            <p class="text-label-caps font-bold">James L.</p>
+                            <p class="text-[10px] opacity-60 uppercase tracking-widest">Verified Buyer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card p-8 rounded-3xl review-card">
+                    <div class="flex gap-1 text-primary-container mb-4">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="text-body-md italic mb-6">"I've tried everything for my hyperpigmentation. This is the first thing that actually made a noticeable difference."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-secondary-container"></div>
+                        <div>
+                            <p class="text-label-caps font-bold">Elena R.</p>
+                            <p class="text-[10px] opacity-60 uppercase tracking-widest">Verified Buyer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-section-gap bg-secondary-container/5 border-t border-on-background/5">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="flex flex-col lg:flex-row gap-16">
+                <!-- Info Column -->
+                <div class="w-full lg:w-1/2 flex flex-col justify-between">
+                    <div>
+                        <span class="text-label-caps font-label-caps text-primary tracking-widest block mb-4 uppercase">Support</span>
+                        <h2 class="text-display-lg-mobile md:text-display-lg font-display-lg mb-8 text-on-background">Get In Touch</h2>
+                        <p class="text-body-lg font-body-lg text-on-surface-variant mb-10 max-w-md">
+                            Have questions about your skincare routine or our products? Our beauty experts are here to help.
+                        </p>
+                    </div>
+                    <div class="space-y-6 mb-8 lg:mb-0">
+                        <div class="flex gap-4 items-center">
+                            <div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">mail</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-on-background">Email Us</h4>
+                                <p class="text-sm text-on-surface-variant">hello@hyphenskincare.com</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">call</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-on-background">Call Us</h4>
+                                <p class="text-sm text-on-surface-variant">+1 (800) 555-0199</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Column -->
+                <div class="w-full lg:w-1/2" id="contact-form-container">
+                    <form class="space-y-6" onsubmit="handleContactForm(event)">
+                        <div>
+                          <label class="block text-sm font-semibold mb-2 text-on-background" for="contact-name">Name</label>
+                          <input class="w-full bg-white/50 dark:bg-black/20 border border-on-background/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-primary focus:bg-white dark:focus:bg-black transition-all text-on-background" id="contact-name" name="name" placeholder="John Doe" type="text" required>
+                        </div>
+                        <div>
+                          <label class="block text-sm font-semibold mb-2 text-on-background" for="contact-email">Email</label>
+                          <input class="w-full bg-white/50 dark:bg-black/20 border border-on-background/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-primary focus:bg-white dark:focus:bg-black transition-all text-on-background" id="contact-email" name="email" placeholder="john@example.com" type="email" required>
+                        </div>
+                        <div>
+                          <label class="block text-sm font-semibold mb-2 text-on-background" for="contact-message">Message</label>
+                          <textarea class="w-full bg-white/50 dark:bg-black/20 border border-on-background/10 rounded-2xl px-5 py-4 focus:outline-none focus:border-primary focus:bg-white dark:focus:bg-black transition-all text-on-background h-32 resize-none" id="contact-message" name="message" placeholder="How can we help you?" required></textarea>
+                        </div>
+                        <button class="w-full bg-primary-container text-on-primary-container text-label-caps font-bold py-4 rounded-full hover:shadow-lg active:scale-95 transition-all text-center">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-24 relative overflow-hidden bg-white">
+        <div class="absolute inset-0 pointer-events-none" id="newsletter-particles"></div>
+        <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+            <div class="glass-card max-w-3xl mx-auto p-12 md:p-20 rounded-[48px]">
+                <h2 class="text-display-lg-mobile md:text-headline-md font-display-lg mb-4">Join the Glow Community</h2>
+                <p class="text-body-lg font-body-lg mb-10 text-on-surface-variant max-w-md mx-auto">Get early access to new launches and expert skincare tips.</p>
+                <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto" onsubmit="event.preventDefault();">
+                    <input class="flex-grow bg-white border border-on-background/10 rounded-full px-8 py-4 focus:outline-none focus:border-primary-container transition-colors" placeholder="your@email.com" type="email">
+                    <button class="bg-primary-container text-on-primary-container text-label-caps font-label-caps px-10 py-4 rounded-full hover:shadow-[0_0_20px_var(--lime-glow)] transition-all active:scale-95">
+                        Join
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Banner -->
+    <section class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#F5DDE1] to-[#FCECEC] z-0"></div>
+        <div class="absolute inset-0 pointer-events-none" id="footer-particles"></div>
+        <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+            <h2 class="text-display-lg-mobile md:text-display-lg font-display-lg mb-8">Ready to Glow?</h2>
+            <p class="text-body-lg font-body-lg mb-12 max-w-2xl mx-auto opacity-80">Join the skincare revolution and experience the HYPHEN effect today.</p>
+            <button onclick="addToCart('serum-01')" class="bg-on-background text-white text-label-caps font-label-caps px-12 py-5 rounded-full hover:scale-105 transition-all duration-300 active:scale-95">
+                Unlock My Glow
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest py-12 bg-gradient-to-t from-secondary-container/30 to-transparent">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter">
+            <div class="flex flex-col items-center md:items-start">
+                <div class="text-headline-sm font-headline-sm text-on-background mb-4">HYPHEN</div>
+                <p class="text-label-caps font-label-caps text-on-surface-variant max-w-xs text-center md:text-left">
+                    © 2024 HYPHEN. VIBRANT SERENITY IN EVERY DROP.
+                </p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-8">
+                <a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+                <a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+                <a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Sustainability</a>
+                <a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Contact Us</a>
+            </div>
+            <div class="flex gap-6">
+                <span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">public</span>
+                <span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">favorite</span>
+                <span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" onclick="toggleAdmin(true)" title="Admin Dashboard">settings</span>
+            </div>
+        </div>
+    </footer>
+    </div>
+
+    <!-- GSAP / Web Animations Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Particle Generation
+            const createParticles = (containerId, count) => {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                for (let i = 0; i < count; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = i % 2 === 0 ? 'particle' : 'water-drop';
+                    const size = Math.random() * 8 + 4;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    container.appendChild(particle);
+
+                    gsap.to(particle, {
+                        y: '-=100',
+                        x: `+=${(Math.random() - 0.5) * 50}`,
+                        opacity: 0,
+                        duration: 3 + Math.random() * 4,
+                        repeat: -1,
+                        ease: 'none',
+                        delay: Math.random() * 5
+                    });
+                }
+            };
+
+            createParticles('particle-container', 40);
+            createParticles('footer-particles', 20);
+            createParticles('newsletter-particles', 15);
+
+            // Hero Text Reveal
+            gsap.from('.reveal-text > *', {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+
+            // Stats Counter Animation
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                ScrollTrigger.create({
+                    trigger: counter,
+                    onEnter: () => {
+                        gsap.to(counter, {
+                            innerText: target,
+                            duration: 2,
+                            snap: { innerText: 1 },
+                            ease: 'power1.inOut'
+                        });
+                    }
+                });
+            });
+
+            // Ingredients Stagger
+            gsap.from('.ingredient-reveal', {
+                scrollTrigger: {
+                    trigger: '.ingredient-reveal',
+                    start: 'top 85%'
+                },
+                y: 60,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.15,
+                ease: 'power4.out'
+            });
+
+            // Benefits Animation
+            gsap.from('.benefit-card', {
+                scrollTrigger: {
+                    trigger: '.benefit-card',
+                    start: 'top 85%'
+                },
+                scale: 0.9,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: 'back.out(1.7)'
+            });
+
+            // Floating movement for hero image
+            gsap.to('.floating-element', {
+                y: 15,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut'
+            });
+
+            // Interactive Parallax
+            window.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                gsap.to('.hero-title', { x: x * 0.5, y: y * 0.5, duration: 0.5 });
+            });
+        });
+    </script>
+
+    <!-- Shopping Cart Side-Drawer -->
+    <div id="cart-drawer" class="cart-drawer p-6 flex flex-col">
+        <div class="flex justify-between items-center pb-6 border-b border-on-background/10">
+            <h3 class="text-xl font-bold text-on-background flex items-center gap-2">
+                <span class="material-symbols-outlined">shopping_basket</span>
+                Your Cart
+            </h3>
+            <button onclick="toggleCart(false)" class="w-8 h-8 rounded-full border border-on-background/10 flex items-center justify-center hover:bg-secondary-container/20 active:scale-95 transition-all text-on-background">
+                <span class="material-symbols-outlined text-sm">close</span>
+            </button>
+        </div>
+        <!-- Scrollable list of items -->
+        <div id="cart-items" class="flex-grow overflow-y-auto py-4">
+            <!-- Populated dynamically via JS -->
+        </div>
+        <!-- Subtotal & Checkout -->
+        <div class="pt-6 border-t border-on-background/10 space-y-4">
+            <div class="flex justify-between items-center">
+                <span class="text-sm font-semibold text-on-surface-variant">Subtotal</span>
+                <span id="cart-subtotal" class="text-xl font-bold text-primary">$0.00</span>
+            </div>
+            <button onclick="checkoutCart()" class="w-full bg-primary-container text-on-primary-container text-label-caps font-bold py-4 rounded-full hover:shadow-lg active:scale-95 transition-all text-center">
+                Checkout Now
+            </button>
+        </div>
+    </div>
+
+    <!-- AI Skin Recommendation Quiz Modal -->
+    <div id="quiz-backdrop" class="modal-backdrop" onclick="closeQuiz()"></div>
+    <div id="quiz-modal" class="modal-container p-6 md:p-10">
+        <div class="flex justify-between items-center pb-6 border-b border-on-background/10">
+            <h3 class="text-xl font-bold text-on-background flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary animate-bounce">psychology</span>
+                AI Skin Consultant
+            </h3>
+            <button onclick="closeQuiz()" class="w-8 h-8 rounded-full border border-on-background/10 flex items-center justify-center hover:bg-secondary-container/20 active:scale-95 transition-all text-on-background">
+                <span class="material-symbols-outlined text-sm">close</span>
+            </button>
+        </div>
+        <!-- Quiz progress line -->
+        <div class="w-full h-1 bg-on-background/5 mt-4 rounded-full overflow-hidden">
+            <div id="quiz-progress" class="h-full bg-primary transition-all duration-300" style="width: 0%;"></div>
+        </div>
+        <div class="py-8">
+            <h4 id="quiz-question" class="text-display-lg-mobile md:text-headline-sm text-on-background font-bold mb-8">
+                Analyzing your skin...
+            </h4>
+            <div id="quiz-options" class="space-y-4">
+                <!-- Dynamically loaded choices -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Dashboard Modal -->
+    <div id="admin-backdrop" class="modal-backdrop" onclick="toggleAdmin(false)"></div>
+    <div id="admin-modal" class="modal-container p-6 md:p-10 max-w-4xl">
+        <div class="flex justify-between items-center pb-6 border-b border-on-background/10">
+            <h3 class="text-xl font-bold text-on-background flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary animate-spin">dashboard</span>
+                Admin Panel Dashboard
+            </h3>
+            <button onclick="toggleAdmin(false)" class="w-8 h-8 rounded-full border border-on-background/10 flex items-center justify-center hover:bg-secondary-container/20 active:scale-95 transition-all text-on-background">
+                <span class="material-symbols-outlined text-sm">close</span>
+            </button>
+        </div>
+        <div class="py-6 overflow-y-auto max-h-[70vh]">
+            <div id="admin-content">
+                <!-- Populated via app.js -->
+            </div>
+        </div>
+    </div>
+
+    <script src="services.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,626 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en" style="scroll-behavior: smooth;"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>HYPHEN | Golden Hour Glow Serum</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;family=Playfair+Display:wght@700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Playfair+Display:wght@100..900&amp;display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+        :root {
+            --lime-glow: rgba(217, 224, 33, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(32px);
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .glass-card:hover {
+            border-color: #D9E021;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04), 0 0 20px var(--lime-glow);
+            transform: translateY(-8px);
+        }
+
+        .hero-title {
+            text-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .water-drop {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            filter: blur(1px);
+        }
+
+        /* Material Symbols styling */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .faq-accordion[open] summary .expand-icon {
+            transform: rotate(45deg);
+        }
+
+        .expand-icon {
+            transition: transform 0.3s ease;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1c1b1b",
+                        "on-primary-container": "#5e6100",
+                        "surface-dim": "#dcd9d9",
+                        "surface": "#fcf9f8",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-primary-fixed-variant": "#474a00",
+                        "secondary": "#6b5a5d",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary-container": "#d9e021",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#f5dde1",
+                        "inverse-surface": "#313030",
+                        "surface-bright": "#fcf9f8",
+                        "on-surface-variant": "#484833",
+                        "inverse-on-surface": "#f3f0ef",
+                        "on-surface": "#1c1b1b",
+                        "surface-container-highest": "#e5e2e1",
+                        "secondary-fixed-dim": "#d8c1c5",
+                        "surface-tint": "#5f6200",
+                        "tertiary-container": "#d7d7d7",
+                        "surface-container": "#f0eded",
+                        "outline-variant": "#c9c8ad",
+                        "primary-fixed-dim": "#c8cf00",
+                        "primary": "#5f6200",
+                        "surface-container-low": "#f6f3f2",
+                        "on-primary-fixed": "#1c1d00",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#c8cf00",
+                        "on-tertiary-container": "#5c5d5e",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e5e2e1",
+                        "tertiary": "#5d5f5f",
+                        "error": "#ba1a1a",
+                        "background": "#fcf9f8",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "on-secondary-container": "#726063",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#797861",
+                        "on-secondary-fixed": "#25181b",
+                        "on-secondary-fixed-variant": "#534346",
+                        "secondary-container": "#f5dde1",
+                        "surface-container-high": "#eae7e7",
+                        "primary-fixed": "#e4eb2f",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "label-caps": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Playfair Display"],
+                        "headline-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["20px", {"lineHeight": "1.5", "letterSpacing": "0.02em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full bg-white/70 backdrop-blur-3xl border-b border-white/20 shadow-sm z-50">
+<nav class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-4 flex justify-between items-center">
+<div class="text-headline-md font-headline-md tracking-widest text-on-background">HYPHEN</div>
+<div class="hidden md:flex gap-10 items-center">
+<a class="text-label-caps font-label-caps text-primary font-bold border-b-2 border-primary pb-1" href="#">Shop</a>
+<a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Ingredients</a>
+<a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Reviews</a>
+</div>
+<button class="bg-primary-container text-on-primary-container text-label-caps font-label-caps px-6 py-2.5 rounded-full hover:shadow-[0_0_20px_var(--lime-glow)] transition-all duration-300 active:scale-95">Buy Now</button>
+</nav>
+</header>
+<!-- Hero Section -->
+<section class="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden">
+
+<!-- Floating Particles Container -->
+<div class="absolute inset-0 pointer-events-none" id="particle-container"><div class="particle" style="width: 7.82435px; height: 7.82435px; left: 55.0919%; top: 93.3241%; translate: none; rotate: none; scale: none; opacity: 0.5479; transform: translate3d(-0.4938px, -8.6857px, 0px);"></div><div class="water-drop" style="width: 8.12569px; height: 8.12569px; left: 44.8586%; top: 82.0822%; translate: none; rotate: none; scale: none; opacity: 0.2913; transform: translate3d(16.3605px, -70.8661px, 0px);"></div><div class="particle" style="width: 7.5635px; height: 7.5635px; left: 72.3591%; top: 91.1451%; translate: none; rotate: none; scale: none; opacity: 0.2691; transform: translate3d(-10.522px, -55.1561px, 0px);"></div><div class="water-drop" style="width: 7.00769px; height: 7.00769px; left: 86.8129%; top: 92.7369%; translate: none; rotate: none; scale: none; opacity: 0.201; transform: translate3d(-13.4589px, -79.8965px, 0px);"></div><div class="particle" style="width: 9.76658px; height: 9.76658px; left: 60.3635%; top: 52.1822%; translate: none; rotate: none; scale: none; opacity: 0.3991; transform: translate3d(-5.8686px, -33.4915px, 0px);"></div><div class="water-drop" style="width: 5.9746px; height: 5.9746px; left: 27.8602%; top: 99.5059%; translate: none; rotate: none; scale: none; opacity: 0.6357; transform: translate3d(-4.0133px, -36.4305px, 0px);"></div><div class="particle" style="width: 11.6381px; height: 11.6381px; left: 70.5983%; top: 81.5113%; translate: none; rotate: none; scale: none; opacity: 0.4779; transform: translate3d(-0.7004px, -20.3582px, 0px);"></div><div class="water-drop" style="width: 4.07272px; height: 4.07272px; left: 46.9836%; top: 1.32408%; translate: none; rotate: none; scale: none; opacity: 0.9853; transform: translate3d(0.0619px, -1.4725px, 0px);"></div><div class="particle" style="width: 4.25345px; height: 4.25345px; left: 47.7733%; top: 50.1578%; translate: none; rotate: none; scale: none; opacity: 0.0835; transform: translate3d(8.1129px, -86.0837px, 0px);"></div><div class="water-drop" style="width: 11.3593px; height: 11.3593px; left: 45.2135%; top: 17.4889%; translate: none; rotate: none; scale: none; opacity: 0.8417; transform: translate3d(1.2139px, -15.8325px, 0px);"></div><div class="particle" style="width: 8.66913px; height: 8.66913px; left: 67.9374%; top: 88.2531%;"></div><div class="water-drop" style="width: 6.60344px; height: 6.60344px; left: 43.2839%; top: 21.7062%; translate: none; rotate: none; scale: none; opacity: 0.3517; transform: translate3d(6.9349px, -64.8314px, 0px);"></div><div class="particle" style="width: 9.78916px; height: 9.78916px; left: 96.3402%; top: 74.4398%; translate: none; rotate: none; scale: none; opacity: 0.3267; transform: translate3d(8.8311px, -45.5581px, 0px);"></div><div class="water-drop" style="width: 8.29732px; height: 8.29732px; left: 40.8957%; top: 74.883%; translate: none; rotate: none; scale: none; opacity: 0.4268; transform: translate3d(-3.5317px, -57.3226px, 0px);"></div><div class="particle" style="width: 6.14487px; height: 6.14487px; left: 24.1584%; top: 73.7852%; translate: none; rotate: none; scale: none; opacity: 0.568; transform: translate3d(-0.5606px, -5.3266px, 0px);"></div><div class="water-drop" style="width: 4.98467px; height: 4.98467px; left: 80.4699%; top: 72.3171%; translate: none; rotate: none; scale: none; opacity: 0.8581; transform: translate3d(-2.0587px, -14.1904px, 0px);"></div><div class="particle" style="width: 10.3543px; height: 10.3543px; left: 54.1155%; top: 58.7929%; translate: none; rotate: none; scale: none; opacity: 0.2232; transform: translate3d(9.7189px, -62.7924px, 0px);"></div><div class="water-drop" style="width: 7.95664px; height: 7.95664px; left: 29.2219%; top: 73.9058%; translate: none; rotate: none; scale: none; opacity: 0.261; transform: translate3d(0.6921px, -73.8998px, 0px);"></div><div class="particle" style="width: 8.3561px; height: 8.3561px; left: 91.8659%; top: 61.7277%; translate: none; rotate: none; scale: none; opacity: 0.2266; transform: translate3d(8.7376px, -62.2361px, 0px);"></div><div class="water-drop" style="width: 11.1716px; height: 11.1716px; left: 82.2724%; top: 63.2105%; translate: none; rotate: none; scale: none; opacity: 0.3653; transform: translate3d(12.6894px, -63.47px, 0px);"></div><div class="particle" style="width: 4.78288px; height: 4.78288px; left: 96.2923%; top: 62.3364%; translate: none; rotate: none; scale: none; opacity: 0.2875; transform: translate3d(7.4485px, -52.0881px, 0px);"></div><div class="water-drop" style="width: 7.17671px; height: 7.17671px; left: 1.88464%; top: 27.3175%;"></div><div class="particle" style="width: 10.5735px; height: 10.5735px; left: 40.1273%; top: 10.7247%; translate: none; rotate: none; scale: none; opacity: 0.4996; transform: translate3d(-0.529px, -16.726px, 0px);"></div><div class="water-drop" style="width: 11.3815px; height: 11.3815px; left: 28.2647%; top: 67.3501%; translate: none; rotate: none; scale: none; opacity: 0.6373; transform: translate3d(8.5085px, -36.2714px, 0px);"></div><div class="particle" style="width: 4.07611px; height: 4.07611px; left: 66.3047%; top: 65.0612%; translate: none; rotate: none; scale: none; opacity: 0.4205; transform: translate3d(5.8773px, -29.9102px, 0px);"></div><div class="water-drop" style="width: 4.85523px; height: 4.85523px; left: 75.5095%; top: 11.534%; translate: none; rotate: none; scale: none; opacity: 0.6132; transform: translate3d(-9.3032px, -38.6763px, 0px);"></div><div class="particle" style="width: 8.92813px; height: 8.92813px; left: 26.7781%; top: 86.0844%; translate: none; rotate: none; scale: none; opacity: 0.3508; transform: translate3d(-2.5389px, -41.5322px, 0px);"></div><div class="water-drop" style="width: 6.5409px; height: 6.5409px; left: 51.5153%; top: 93.1515%; translate: none; rotate: none; scale: none; opacity: 0.227; transform: translate3d(5.1272px, -77.2954px, 0px);"></div><div class="particle" style="width: 7.44054px; height: 7.44054px; left: 28.9469%; top: 96.2261%; translate: none; rotate: none; scale: none; opacity: 0.3122; transform: translate3d(11.5846px, -47.9604px, 0px);"></div><div class="water-drop" style="width: 9.86128px; height: 9.86128px; left: 63.7714%; top: 0.175084%; translate: none; rotate: none; scale: none; opacity: 0.4651; transform: translate3d(4.1741px, -53.4872px, 0px);"></div><div class="particle" style="width: 5.63401px; height: 5.63401px; left: 58.7648%; top: 26.93%; translate: none; rotate: none; scale: none; opacity: 0.333; transform: translate3d(10.6755px, -44.5002px, 0px);"></div><div class="water-drop" style="width: 10.7098px; height: 10.7098px; left: 11.0889%; top: 66.5311%; translate: none; rotate: none; scale: none; opacity: 0.5133; transform: translate3d(-2.6943px, -48.6682px, 0px);"></div><div class="particle" style="width: 11.9749px; height: 11.9749px; left: 28.6052%; top: 69.1248%;"></div><div class="water-drop" style="width: 7.50988px; height: 7.50988px; left: 67.1532%; top: 87.2623%; translate: none; rotate: none; scale: none; opacity: 0.5311; transform: translate3d(9.7467px, -46.8944px, 0px);"></div><div class="particle" style="width: 9.4648px; height: 9.4648px; left: 37.1577%; top: 78.8847%; translate: none; rotate: none; scale: none; opacity: 0.5095; transform: translate3d(2.0061px, -15.0823px, 0px);"></div><div class="water-drop" style="width: 8.30954px; height: 8.30954px; left: 18.2685%; top: 56.6843%;"></div><div class="particle" style="width: 5.14253px; height: 5.14253px; left: 39.4135%; top: 79.5848%; translate: none; rotate: none; scale: none; opacity: 0.4587; transform: translate3d(-3.1335px, -23.5462px, 0px);"></div><div class="water-drop" style="width: 10.7264px; height: 10.7264px; left: 15.6051%; top: 37.3457%; translate: none; rotate: none; scale: none; opacity: 0.7658; transform: translate3d(-3.7025px, -23.4166px, 0px);"></div><div class="particle" style="width: 5.81758px; height: 5.81758px; left: 81.9688%; top: 58.8981%; translate: none; rotate: none; scale: none; opacity: 0.211; transform: translate3d(-9.9246px, -64.8309px, 0px);"></div><div class="water-drop" style="width: 5.13768px; height: 5.13768px; left: 32.373%; top: 68.2816%; translate: none; rotate: none; scale: none; opacity: 0.4279; transform: translate3d(-1.3231px, -57.2134px, 0px);"></div></div>
+<div class="relative z-10 container max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center gap-gutter">
+<div class="w-full md:w-1/2 text-center md:text-left reveal-text">
+<h1 class="text-display-lg-mobile md:text-display-lg font-display-lg mb-6 hero-title" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                    Glow Like Golden Hour, <br> <span class="text-primary-container">Every Hour</span>
+</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant mb-10 max-w-lg mx-auto md:mx-0" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+                    56% Glow Hyphened™ Serum powered by Kakadu Plum, Niacinamide and Ceramides.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+<button class="bg-primary-container text-on-primary-container text-label-caps font-label-caps px-10 py-4 rounded-full hover:shadow-lg transition-all active:scale-95">Buy Now</button>
+<button class="border border-primary-container/40 backdrop-blur-md text-label-caps font-label-caps px-10 py-4 rounded-full hover:bg-primary-container/5 hover:shadow-[0_0_15px_var(--lime-glow)] transition-all duration-300 active:scale-95">Add to Cart</button>
+</div>
+</div>
+<div class="w-full md:w-1/2 flex justify-center relative mt-12 md:mt-0">
+<div class="floating-element relative z-20" style="translate: none; rotate: none; scale: none; transform: translate3d(0px, 0.8074px, 0px) rotate(0.00115deg);">
+<img class="w-[300px] md:w-[450px] drop-shadow-2xl" data-alt="A high-end product photography shot of the HYPHEN Golden Hour Glow Serum, a bright lime-green bottle splashed with crystal clear water droplets against a soft gradient pink and peach background. The lighting is ethereal and warm, mimicking a golden hour sunset, with sharp highlights on the water ripples and bottle edges to convey luxury and hydration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBibvmL2LBI31VWchreLuNL1I_mhaREXeXojgPpL3_qTmPYTcAyZusGD13DWbYOsUI9OpdSFjRipBcg27oWY-qeRiv5LWqBMqG6nI7l0aeTSwpi2-mHVOjkM1T7jX4N9i4Hszl_hO9hLltuOyH-tUR2pzmw1aWfwmNYRjG8ipSJUdGzr9lNTEIzSZMiSg0yqhEXe0pwTLnqhLTwrJL3-qDYqf8bnHLiwCFtbikaOefqTQKJvReB4BINRokaw_L-FexYYHwhezpnXnA">
+</div>
+<!-- Ambient Glow behind bottle -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary-container/20 blur-[120px] rounded-full -z-10"></div>
+</div>
+</div>
+</section>
+<!-- Stats Section -->
+<section class="py-12 bg-white/40 backdrop-blur-xl border-y border-white/20">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+<div class="stat-item">
+<div class="text-display-lg-mobile md:text-display-lg font-display-lg text-primary-container counter" data-target="56">56</div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mt-2">Glow Formula</p>
+</div>
+<div class="stat-item border-x-0 md:border-x border-on-background/10">
+<div class="text-display-lg-mobile md:text-display-lg font-display-lg text-primary-container counter" data-target="10000">10000</div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mt-2">Happy Customers</p>
+</div>
+<div class="stat-item">
+<div class="text-display-lg-mobile md:text-display-lg font-display-lg text-primary-container">4.8★</div>
+<p class="text-label-caps font-label-caps text-on-surface-variant mt-2">Trust Rating</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Showcase -->
+<section class="py-section-gap relative overflow-hidden">
+<div class="container max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center mb-16">
+<h2 class="text-headline-md font-headline-md mb-4">Precision in Every Molecule</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Interact with our signature formulation in 3D space.</p>
+</div>
+<div class="h-[600px] w-full relative">
+
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 bg-white/20 backdrop-blur-md px-6 py-2 rounded-full border border-white/30 text-label-caps text-[10px] font-label-caps tracking-widest text-on-surface">
+                DRAG TO ROTATE EXPERIENCE
+            </div>
+</div>
+</section>
+<!-- Ingredients Bento Grid -->
+<section class="py-section-gap bg-secondary-container/10">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16">
+<div class="max-w-2xl">
+<span class="text-label-caps font-label-caps text-primary tracking-widest block mb-4 uppercase">The Science</span>
+<h2 class="text-display-lg-mobile md:text-display-lg font-display-lg">The Power Quintet</h2>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant max-w-sm mt-6 md:mt-0">Clinical strength botanical actives formulated for maximal bioavailability and luminous results.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-6 gap-6">
+<!-- Large Card -->
+<div class="md:col-span-3 glass-card p-10 rounded-[40px] flex flex-col justify-between h-[450px] ingredient-reveal" style="translate: none; rotate: none; scale: none; opacity: 0.0111; transform: translate(0px, 59.3351px);">
+<div>
+<div class="w-16 h-16 bg-primary-container/20 rounded-2xl flex items-center justify-center mb-8">
+<img alt="Ingredient Icon" class="w-8 h-8" src="data:image/png;base64,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">
+</div>
+<h3 class="text-headline-md font-headline-md mb-4">Kakadu Plum</h3>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">The world's richest source of Vitamin C, providing 100x more than an orange for unparalleled brightening and antioxidant protection.</p>
+</div>
+<div class="text-label-caps font-label-caps text-primary border-b border-primary w-fit mt-8 cursor-pointer hover:opacity-70 transition-opacity">Discover More</div>
+</div>
+<!-- Medium Card -->
+<div class="md:col-span-3 glass-card p-10 rounded-[40px] flex flex-col justify-between h-[450px] ingredient-reveal" style="translate: none; rotate: none; scale: none; opacity: 0.0003; transform: translate(0px, 59.9837px);">
+<div>
+<div class="w-16 h-16 bg-primary-container/20 rounded-2xl flex items-center justify-center mb-8">
+<img alt="Ingredient Icon" class="w-8 h-8" src="data:image/png;base64,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">
+</div>
+<h3 class="text-headline-md font-headline-md mb-4">Niacinamide (5%)</h3>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">Refines pore appearance, strengthens the lipid barrier, and calms redness for a smooth, porcelain finish.</p>
+</div>
+<div class="text-label-caps font-label-caps text-primary border-b border-primary w-fit mt-8 cursor-pointer hover:opacity-70 transition-opacity">Scientific Data</div>
+</div>
+<!-- Small Cards -->
+<div class="md:col-span-2 glass-card p-8 rounded-[32px] ingredient-reveal" style="translate: none; rotate: none; scale: none; opacity: 0; transform: translate(0px, 60px);">
+<img alt="Ingredient Icon" class="w-10 h-10 mb-6" src="data:image/png;base64,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">
+<h4 class="text-headline-sm font-headline-sm mb-2">Ceramides</h4>
+<p class="text-body-md font-body-md text-on-surface-variant opacity-80">Locks in moisture for all-day elasticity.</p>
+</div>
+<div class="md:col-span-2 glass-card p-8 rounded-[32px] ingredient-reveal" style="translate: none; rotate: none; scale: none; opacity: 0; transform: translate(0px, 60px);">
+<img alt="Ingredient Icon" class="w-10 h-10 mb-6" src="data:image/png;base64,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">
+<h4 class="text-headline-sm font-headline-sm mb-2">Alpha Arbutin</h4>
+<p class="text-body-md font-body-md text-on-surface-variant opacity-80">Targets dark spots and hyperpigmentation.</p>
+</div>
+<div class="md:col-span-2 glass-card p-8 rounded-[32px] ingredient-reveal" style="translate: none; rotate: none; scale: none; opacity: 0; transform: translate(0px, 60px);">
+<img alt="Ingredient Icon" class="w-10 h-10 mb-6" src="data:image/png;base64,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">
+<h4 class="text-headline-sm font-headline-sm mb-2">Peptides</h4>
+<p class="text-body-md font-body-md text-on-surface-variant opacity-80">Stimulates collagen for firming results.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- How to Use Section -->
+<section class="py-section-gap bg-white">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<span class="text-label-caps font-label-caps text-primary tracking-widest block mb-4 uppercase">Application</span>
+<h2 class="text-display-lg-mobile md:text-display-lg font-display-lg">The Glow Ritual</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<div class="group flex flex-col items-center text-center p-8 rounded-[32px] hover:bg-primary-container/5 transition-all duration-300">
+<div class="w-20 h-20 bg-primary-container/10 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-primary text-4xl">dry_cleaning</span>
+</div>
+<div class="text-label-caps font-label-caps text-primary mb-2">STEP 01</div>
+<h3 class="text-headline-sm font-headline-sm mb-4">Cleanse</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Begin with a fresh canvas. Use a gentle cleanser to remove impurities and prep skin for absorption.</p>
+</div>
+<div class="group flex flex-col items-center text-center p-8 rounded-[32px] hover:bg-primary-container/5 transition-all duration-300">
+<div class="w-20 h-20 bg-primary-container/10 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-primary text-4xl">water_drop</span>
+</div>
+<div class="text-label-caps font-label-caps text-primary mb-2">STEP 02</div>
+<h3 class="text-headline-sm font-headline-sm mb-4">Apply</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Dispense 2-3 drops of Golden Hour Glow. Gently pat onto face and neck until fully absorbed.</p>
+</div>
+<div class="group flex flex-col items-center text-center p-8 rounded-[32px] hover:bg-primary-container/5 transition-all duration-300">
+<div class="w-20 h-20 bg-primary-container/10 rounded-full flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+<span class="material-symbols-outlined text-primary text-4xl">shield</span>
+</div>
+<div class="text-label-caps font-label-caps text-primary mb-2">STEP 03</div>
+<h3 class="text-headline-sm font-headline-sm mb-4">Seal</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Lock in the hydration with your favorite moisturizer or sunscreen to maintain that lit-from-within glow.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Benefits Section -->
+<section class="py-section-gap overflow-hidden">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<h2 class="text-display-lg-mobile md:text-display-lg font-display-lg text-center mb-20 benefit-title">Wait, There's More...</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Benefit Items -->
+<div class="benefit-card group" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+<div class="p-8 rounded-[40px] border border-on-background/5 hover:border-primary-container/40 transition-all duration-500 hover:bg-white shadow-sm h-full">
+<span class="material-symbols-outlined text-primary text-4xl mb-6 block group-hover:scale-110 transition-transform">flare</span>
+<h3 class="text-headline-sm font-headline-sm mb-4">Brightens Skin</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Evens out dullness to reveal a lit-from-within luminosity that lasts all day.</p>
+</div>
+</div>
+<div class="benefit-card group" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+<div class="p-8 rounded-[40px] border border-on-background/5 hover:border-primary-container/40 transition-all duration-500 hover:bg-white shadow-sm h-full">
+<span class="material-symbols-outlined text-primary text-4xl mb-6 block group-hover:scale-110 transition-transform">water_drop</span>
+<h3 class="text-headline-sm font-headline-sm mb-4">Hydrates Deeply</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">7-layer hydration technology that penetrates the epidermis for plump, bouncy skin.</p>
+</div>
+</div>
+<div class="benefit-card group" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+<div class="p-8 rounded-[40px] border border-on-background/5 hover:border-primary-container/40 transition-all duration-500 hover:bg-white shadow-sm h-full">
+<span class="material-symbols-outlined text-primary text-4xl mb-6 block group-hover:scale-110 transition-transform">shield_moon</span>
+<h3 class="text-headline-sm font-headline-sm mb-4">Barrier Repair</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Ceramide complex reinforces the skin’s natural shield against environmental stressors.</p>
+</div>
+</div>
+<div class="benefit-card group" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+<div class="p-8 rounded-[40px] border border-on-background/5 hover:border-primary-container/40 transition-all duration-500 hover:bg-white shadow-sm h-full">
+<span class="material-symbols-outlined text-primary text-4xl mb-6 block group-hover:scale-110 transition-transform">gradient</span>
+<h3 class="text-headline-sm font-headline-sm mb-4">Reduces Spots</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Clinically proven to reduce hyperpigmentation by 32% in just 14 days.</p>
+</div>
+</div>
+<div class="benefit-card group" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+<div class="p-8 rounded-[40px] border border-on-background/5 hover:border-primary-container/40 transition-all duration-500 hover:bg-white shadow-sm h-full">
+<span class="material-symbols-outlined text-primary text-4xl mb-6 block group-hover:scale-110 transition-transform">auto_awesome</span>
+<h3 class="text-headline-sm font-headline-sm mb-4">Instant Glow</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Reflective particles give an immediate glass-skin effect before makeup application.</p>
+</div>
+</div>
+<div class="benefit-card group" style="translate: none; rotate: none; scale: none; opacity: 1; transform: translate(0px, 0px);">
+<div class="p-8 rounded-[40px] border border-on-background/5 hover:border-primary-container/40 transition-all duration-500 hover:bg-white shadow-sm h-full">
+<span class="material-symbols-outlined text-primary text-4xl mb-6 block group-hover:scale-110 transition-transform">waves</span>
+<h3 class="text-headline-sm font-headline-sm mb-4">Evens Skin Tone</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Smoothes out texture and balances complexion for a unified, healthy look.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-section-gap bg-surface-container-low">
+<div class="max-w-[800px] mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-16">
+<h2 class="text-display-lg-mobile md:text-headline-md font-display-lg">Your Glow, Decoded</h2>
+</div>
+<div class="space-y-4">
+<details class="faq-accordion glass-card rounded-2xl overflow-hidden group">
+<summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+<span class="text-headline-sm font-headline-sm">Is it suitable for sensitive skin?</span>
+<span class="material-symbols-outlined expand-icon text-primary">add</span>
+</summary>
+<div class="px-6 pb-6 text-body-md font-body-md text-on-surface-variant">
+                    Yes, our formula is dermatologically tested and pH-balanced to be gentle on all skin types, including sensitive and acne-prone skin.
+                </div>
+</details>
+<details class="faq-accordion glass-card rounded-2xl overflow-hidden group">
+<summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+<span class="text-headline-sm font-headline-sm">Can I use it with Retinol?</span>
+<span class="material-symbols-outlined expand-icon text-primary">add</span>
+</summary>
+<div class="px-6 pb-6 text-body-md font-body-md text-on-surface-variant">
+                    Absolutely. The Niacinamide and Ceramides in our serum actually help soothe the skin, making it a great companion for potentially irritating actives like Retinol.
+                </div>
+</details>
+<details class="faq-accordion glass-card rounded-2xl overflow-hidden group">
+<summary class="flex justify-between items-center p-6 cursor-pointer list-none">
+<span class="text-headline-sm font-headline-sm">When will I see results?</span>
+<span class="material-symbols-outlined expand-icon text-primary">add</span>
+</summary>
+<div class="px-6 pb-6 text-body-md font-body-md text-on-surface-variant">
+                    You'll notice an immediate "glass-skin" glow upon application. For long-term benefits like reduced hyperpigmentation and improved texture, clinical results show significant changes in 14 to 28 days of consistent use.
+                </div>
+</details>
+</div>
+</div>
+</section>
+<!-- Reviews Section -->
+<section class="py-section-gap bg-surface">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<h2 class="text-headline-md font-headline-md text-center mb-16">The Verdict</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="glass-card p-8 rounded-3xl review-card">
+<div class="flex gap-1 text-primary-container mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-md italic mb-6">"Literally magic in a bottle. My skin has never looked this vibrant and the texture is so much smoother after just a week."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container"></div>
+<div>
+<p class="text-label-caps font-bold">Sophia M.</p>
+<p class="text-[10px] opacity-60 uppercase tracking-widest">Verified Buyer</p>
+</div>
+</div>
+</div>
+<div class="glass-card p-8 rounded-3xl review-card">
+<div class="flex gap-1 text-primary-container mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-md italic mb-6">"The best part is how it feels—non-sticky but super hydrating. It works perfectly under my foundation."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container"></div>
+<div>
+<p class="text-label-caps font-bold">James L.</p>
+<p class="text-[10px] opacity-60 uppercase tracking-widest">Verified Buyer</p>
+</div>
+</div>
+</div>
+<div class="glass-card p-8 rounded-3xl review-card">
+<div class="flex gap-1 text-primary-container mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-body-md italic mb-6">"I've tried everything for my hyperpigmentation. This is the first thing that actually made a noticeable difference."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container"></div>
+<div>
+<p class="text-label-caps font-bold">Elena R.</p>
+<p class="text-[10px] opacity-60 uppercase tracking-widest">Verified Buyer</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter Section -->
+<section class="py-24 relative overflow-hidden bg-white">
+<div class="absolute inset-0 pointer-events-none" id="newsletter-particles"><div class="particle" style="width: 5.82855px; height: 5.82855px; left: 49.4295%; top: 13.4901%; translate: none; rotate: none; scale: none; opacity: 0.3593; transform: translate3d(9.9942px, -40.1193px, 0px);"></div><div class="water-drop" style="width: 9.8148px; height: 9.8148px; left: 85.8936%; top: 79.3861%; translate: none; rotate: none; scale: none; opacity: 0.8183; transform: translate3d(2.7864px, -18.1723px, 0px);"></div><div class="particle" style="width: 6.60991px; height: 6.60991px; left: 37.3414%; top: 28.7563%; translate: none; rotate: none; scale: none; opacity: 0.2175; transform: translate3d(-5.8332px, -63.7539px, 0px);"></div><div class="water-drop" style="width: 10.5537px; height: 10.5537px; left: 42.1421%; top: 74.957%; translate: none; rotate: none; scale: none; opacity: 0.2864; transform: translate3d(6.6706px, -71.3568px, 0px);"></div><div class="particle" style="width: 7.28893px; height: 7.28893px; left: 45.2166%; top: 40.9741%; translate: none; rotate: none; scale: none; opacity: 0.2756; transform: translate3d(9.428px, -54.0585px, 0px);"></div><div class="water-drop" style="width: 4.14566px; height: 4.14566px; left: 6.29459%; top: 84.7301%; translate: none; rotate: none; scale: none; opacity: 0.7023; transform: translate3d(1.8088px, -29.7738px, 0px);"></div><div class="particle" style="width: 7.50565px; height: 7.50565px; left: 8.3276%; top: 93.5378%; translate: none; rotate: none; scale: none; opacity: 0.1485; transform: translate3d(-5.1611px, -75.249px, 0px);"></div><div class="water-drop" style="width: 7.46856px; height: 7.46856px; left: 67.2564%; top: 55.9523%; translate: none; rotate: none; scale: none; opacity: 0.0614; transform: translate3d(-14.0722px, -93.8648px, 0px);"></div><div class="particle" style="width: 4.88468px; height: 4.88468px; left: 80.7824%; top: 22.2373%;"></div><div class="water-drop" style="width: 8.801px; height: 8.801px; left: 37.298%; top: 87.1522%; translate: none; rotate: none; scale: none; opacity: 0.02; transform: translate3d(2.0962px, -98.0045px, 0px);"></div><div class="particle" style="width: 10.0034px; height: 10.0034px; left: 0.240368%; top: 4.12258%;"></div><div class="water-drop" style="width: 11.1991px; height: 11.1991px; left: 19.4757%; top: 7.68446%; translate: none; rotate: none; scale: none; opacity: 0.9594; transform: translate3d(0.223px, -4.0637px, 0px);"></div><div class="particle" style="width: 6.86217px; height: 6.86217px; left: 38.7802%; top: 77.5414%; translate: none; rotate: none; scale: none; opacity: 0.3291; transform: translate3d(3.4222px, -45.1575px, 0px);"></div><div class="water-drop" style="width: 5.04867px; height: 5.04867px; left: 34.1916%; top: 44.6859%; translate: none; rotate: none; scale: none; opacity: 0.5873; transform: translate3d(1.3181px, -41.271px, 0px);"></div><div class="particle" style="width: 8.78731px; height: 8.78731px; left: 39.2263%; top: 41.3903%; translate: none; rotate: none; scale: none; opacity: 0.3832; transform: translate3d(-0.0286px, -36.1406px, 0px);"></div></div>
+<div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<div class="glass-card max-w-3xl mx-auto p-12 md:p-20 rounded-[48px]">
+<h2 class="text-display-lg-mobile md:text-headline-md font-display-lg mb-4">Join the Glow Community</h2>
+<p class="text-body-lg font-body-lg mb-10 text-on-surface-variant max-w-md mx-auto">Get early access to new launches and expert skincare tips.</p>
+<form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto" onsubmit="event.preventDefault();">
+<input class="flex-grow bg-white border border-on-background/10 rounded-full px-8 py-4 focus:outline-none focus:border-primary-container transition-colors" placeholder="your@email.com" type="email">
+<button class="bg-primary-container text-on-primary-container text-label-caps font-label-caps px-10 py-4 rounded-full hover:shadow-[0_0_20px_var(--lime-glow)] transition-all active:scale-95">
+                        Join
+                    </button>
+</form>
+</div>
+</div>
+</section>
+<!-- Final CTA Banner -->
+<section class="py-24 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-[#F5DDE1] to-[#FCECEC] z-0"></div>
+<div class="absolute inset-0 pointer-events-none" id="footer-particles"><div class="particle" style="width: 9.01598px; height: 9.01598px; left: 89.9587%; top: 93.8747%; translate: none; rotate: none; scale: none; opacity: 0.5079; transform: translate3d(-1.562px, -15.3567px, 0px);"></div><div class="water-drop" style="width: 6.52075px; height: 6.52075px; left: 31.3919%; top: 60.4865%; translate: none; rotate: none; scale: none; opacity: 0.2922; transform: translate3d(7.5818px, -70.7819px, 0px);"></div><div class="particle" style="width: 11.8431px; height: 11.8431px; left: 41.7895%; top: 75.3811%; translate: none; rotate: none; scale: none; opacity: 0.5452; transform: translate3d(1.6004px, -9.1255px, 0px);"></div><div class="water-drop" style="width: 9.44833px; height: 9.44833px; left: 60.812%; top: 12.7596%; translate: none; rotate: none; scale: none; opacity: 0.4616; transform: translate3d(6.9871px, -53.837px, 0px);"></div><div class="particle" style="width: 5.41018px; height: 5.41018px; left: 36.6892%; top: 13.7493%;"></div><div class="water-drop" style="width: 6.55474px; height: 6.55474px; left: 5.54094%; top: 88.2551%; translate: none; rotate: none; scale: none; opacity: 0.7687; transform: translate3d(-3.2593px, -23.1293px, 0px);"></div><div class="particle" style="width: 9.21758px; height: 9.21758px; left: 45.8521%; top: 15.2318%;"></div><div class="water-drop" style="width: 9.63866px; height: 9.63866px; left: 45.6199%; top: 28.5306%; translate: none; rotate: none; scale: none; opacity: 0.6993; transform: translate3d(2.3955px, -30.0661px, 0px);"></div><div class="particle" style="width: 4.30856px; height: 4.30856px; left: 69.2568%; top: 57.5494%; translate: none; rotate: none; scale: none; opacity: 0.5131; transform: translate3d(-2.4172px, -14.486px, 0px);"></div><div class="water-drop" style="width: 7.50878px; height: 7.50878px; left: 84.1915%; top: 66.0481%; translate: none; rotate: none; scale: none; opacity: 0.4319; transform: translate3d(-4.2436px, -56.8143px, 0px);"></div><div class="particle" style="width: 8.1698px; height: 8.1698px; left: 49.2534%; top: 73.7194%; translate: none; rotate: none; scale: none; opacity: 0.5585; transform: translate3d(1.6436px, -6.9173px, 0px);"></div><div class="water-drop" style="width: 9.98064px; height: 9.98064px; left: 66.9709%; top: 98.4935%; translate: none; rotate: none; scale: none; opacity: 0.3965; transform: translate3d(5.5177px, -60.3462px, 0px);"></div><div class="particle" style="width: 8.44923px; height: 8.44923px; left: 78.2676%; top: 50.0817%; translate: none; rotate: none; scale: none; opacity: 0.4656; transform: translate3d(2.1982px, -22.3924px, 0px);"></div><div class="water-drop" style="width: 4.38015px; height: 4.38015px; left: 14.2553%; top: 49.7194%; translate: none; rotate: none; scale: none; opacity: 0.3496; transform: translate3d(8.5433px, -65.0415px, 0px);"></div><div class="particle" style="width: 8.33892px; height: 8.33892px; left: 98.1549%; top: 20.1397%; translate: none; rotate: none; scale: none; opacity: 0.3903; transform: translate3d(-2.4563px, -34.9492px, 0px);"></div><div class="water-drop" style="width: 4.51065px; height: 4.51065px; left: 49.5472%; top: 75.9682%; translate: none; rotate: none; scale: none; opacity: 0.5298; transform: translate3d(-3.9001px, -47.0174px, 0px);"></div><div class="particle" style="width: 6.74472px; height: 6.74472px; left: 99.7146%; top: 87.4662%;"></div><div class="water-drop" style="width: 4.17966px; height: 4.17966px; left: 72.6214%; top: 73.7092%; translate: none; rotate: none; scale: none; opacity: 0.3884; transform: translate3d(-10.2336px, -61.1606px, 0px);"></div><div class="particle" style="width: 7.37076px; height: 7.37076px; left: 89.6874%; top: 23.4168%; translate: none; rotate: none; scale: none; opacity: 0.5229; transform: translate3d(2.0281px, -12.8474px, 0px);"></div><div class="water-drop" style="width: 5.92005px; height: 5.92005px; left: 46.2559%; top: 53.1641%; translate: none; rotate: none; scale: none; opacity: 0.4544; transform: translate3d(-12.1185px, -54.5599px, 0px);"></div></div>
+<div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<h2 class="text-display-lg-mobile md:text-display-lg font-display-lg mb-8">Ready to Glow?</h2>
+<p class="text-body-lg font-body-lg mb-12 max-w-2xl mx-auto opacity-80">Join the skincare revolution and experience the HYPHEN effect today.</p>
+<button class="bg-on-background text-white text-label-caps font-label-caps px-12 py-5 rounded-full hover:scale-105 transition-all duration-300">
+                Unlock My Glow
+            </button>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest py-12 bg-gradient-to-t from-secondary-container/30 to-transparent">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter">
+<div class="flex flex-col items-center md:items-start">
+<div class="text-headline-sm font-headline-sm text-on-background mb-4">HYPHEN</div>
+<p class="text-label-caps font-label-caps text-on-surface-variant max-w-xs text-center md:text-left">
+                    © 2024 HYPHEN. VIBRANT SERENITY IN EVERY DROP.
+                </p>
+</div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Sustainability</a>
+<a class="text-label-caps font-label-caps text-on-surface-variant hover:text-primary transition-colors" href="#">Contact Us</a>
+</div>
+<div class="flex gap-6">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">public</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">favorite</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">share</span>
+</div>
+</div>
+</footer>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Particle Generation
+            const createParticles = (containerId, count) => {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                for (let i = 0; i < count; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = i % 2 === 0 ? 'particle' : 'water-drop';
+                    const size = Math.random() * 8 + 4;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    container.appendChild(particle);
+
+                    gsap.to(particle, {
+                        y: '-=100',
+                        x: `+=${(Math.random() - 0.5) * 50}`,
+                        opacity: 0,
+                        duration: 3 + Math.random() * 4,
+                        repeat: -1,
+                        ease: 'none',
+                        delay: Math.random() * 5
+                    });
+                }
+            };
+
+            createParticles('particle-container', 40);
+            createParticles('footer-particles', 20);
+            createParticles('newsletter-particles', 15);
+
+            // Hero Text Reveal
+            gsap.from('.reveal-text > *', {
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+
+            // Stats Counter Animation
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                ScrollTrigger.create({
+                    trigger: counter,
+                    onEnter: () => {
+                        gsap.to(counter, {
+                            innerText: target,
+                            duration: 2,
+                            snap: { innerText: 1 },
+                            ease: 'power1.inOut'
+                        });
+                    }
+                });
+            });
+
+            // Ingredients Stagger
+            gsap.from('.ingredient-reveal', {
+                scrollTrigger: {
+                    trigger: '.ingredient-reveal',
+                    start: 'top 85%'
+                },
+                y: 60,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.15,
+                ease: 'power4.out'
+            });
+
+            // Benefits Animation
+            gsap.from('.benefit-card', {
+                scrollTrigger: {
+                    trigger: '.benefit-card',
+                    start: 'top 85%'
+                },
+                scale: 0.9,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: 'back.out(1.7)'
+            });
+
+            // Floating movement for hero image
+            gsap.to('.floating-element', {
+                y: 15,
+                duration: 2,
+                repeat: -1,
+                yoyo: true,
+                ease: 'sine.inOut'
+            });
+
+            // Interactive Parallax
+            window.addEventListener('mousemove', (e) => {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                gsap.to('.hero-title', { x: x * 0.5, y: y * 0.5, duration: 0.5 });
+            });
+        });
+    </script>
+
+
+</body></html>
