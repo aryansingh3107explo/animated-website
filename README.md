@@ -23,6 +23,11 @@ An animated skincare product website inspired by Hyphen's Golden Hour Serum.
 
 This project recreates a premium skincare brand experience using modern web design principles. The website focuses on immersive storytelling, elegant animations, and responsive layouts to showcase a skincare serum product.
 
+## Live Demo 
+https://aryansingh3107explo.github.io/animated-website/
+
+
+
 ## Installation
 
 ```bash
